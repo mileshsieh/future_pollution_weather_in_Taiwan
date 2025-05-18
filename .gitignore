@@ -1,0 +1,14 @@
+#python
+./code/.ipynb_checkpoints/
+./code/__pycache__/
+./codes_supplementary/.ipynb_checkpoints/
+./codes_supplementary/__pycache__/
+./ipynb_checkpoints/
+.ipynb_checkpoints/
+*.nc
+*.pkl
+*.npy
+*.png
+*.mp4
+*test*
+
