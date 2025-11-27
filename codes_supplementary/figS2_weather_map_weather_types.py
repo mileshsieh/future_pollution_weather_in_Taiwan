@@ -106,7 +106,7 @@ cax=fig.add_axes([0.25, 0.2, 0.5, 0.03])
 cbar=plt.colorbar(cs_p, cax=cax, orientation='horizontal',extend='max')
 cbar.set_label('Precipitation(mm/hr)',fontsize=14)
 plt.suptitle('Composite Weather Maps in Different Cold-Season Weather Types(%d-%d)'%(yr_start,yr_end),y=0.90,fontsize=30)
-plt.savefig('../figures/fig1_weatherMap_all_types.ERA5.png',bbox_inches='tight',dpi=200)
+plt.savefig('../figures/figS2_weatherMap_all_types.ERA5.png',bbox_inches='tight',dpi=300)
 
 
 

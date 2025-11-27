@@ -114,5 +114,5 @@ if __name__=='__main__':
     plt.suptitle('%s Bias in Frequency of Lee Vortex Days (%d-%d)'%(m,yr_start,yr_end),fontsize=30)
     plt.annotate('(a)', xy=(0.05, 0.94), xytext=(0.06, 0.81),xycoords='figure fraction',fontsize=22)
     plt.annotate('(b)', xy=(0.67, 0.95), xytext=(0.48, 0.81),xycoords='figure fraction',fontsize=22)
-  plt.savefig('../figures/fig6_%s_UFR_bias.png'%m,bbox_inches='tight',dpi=300)
+  plt.savefig('../figures/fig4_%s_UFR_bias.png'%m,bbox_inches='tight',dpi=300)
 

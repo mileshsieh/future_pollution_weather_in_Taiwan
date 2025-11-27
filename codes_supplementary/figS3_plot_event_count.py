@@ -50,5 +50,5 @@ if __name__=='__main__':
   ax.legend(loc='upper right',fontsize=15)
   ax.set_ylim(0, )
 
-  plt.savefig('../figures/fig2_event_count.png',dpi=200)
+  plt.savefig('../figures/figS3_event_count.png',dpi=300)
   

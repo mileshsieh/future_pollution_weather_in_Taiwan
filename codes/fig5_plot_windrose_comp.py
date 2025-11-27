@@ -155,4 +155,4 @@ if __name__=='__main__':
     #plt.annotate('(a)', xy=(0.08, 0.88), xytext=(0.08, 0.88),xycoords='figure fraction',fontsize=14)
     #plt.annotate('(b)', xy=(0.52, 0.88), xytext=(0.52, 0.88),xycoords='figure fraction',fontsize=14)
     plt.suptitle(f'Upstream Flow Regimes of Lee Vortex Days\n in {m} {runDict[run][0][:3]}{runDict[run][0][-3:]} Projection',fontsize=20)
-    plt.savefig('../figures/wr.%s.comp.png'%m)
+    plt.savefig('../figures/fig5_wr.%s.comp.png'%m,dpi=300)

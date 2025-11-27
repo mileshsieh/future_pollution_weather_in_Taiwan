@@ -142,7 +142,7 @@ if __name__=='__main__':
         #         levels=np.linspace(0,300,16),extend='max',cmap=r_cmap)
 
         cf_no2=plot_no2(ax,no2_wd[wd_cat][1],lonTW,latTW,topo,\
-              np.linspace(0,600,16),r_cmap,'max',f'({lbl[ilbl]}) $WD={wd_cat}\pm15^\circ$\n $NO_2$ Conc. ({ndays_wd[wd_cat][1]} days)',\
+              np.linspace(0,600,16),r_cmap,'max',f'({lbl[ilbl]}) $WD={wd_cat}\pm15^\circ$\n $NO_x$ Conc. ({ndays_wd[wd_cat][1]} days)',\
               only_conc=True)
         great_taipei.boundary.plot(ax=ax,lw=1.2,color='navy',zorder=5)
         ilbl=ilbl+1
@@ -165,11 +165,11 @@ if __name__=='__main__':
     fig.subplots_adjust(left=0.05,right=0.83)
     ax_cb_no2=fig.add_axes([0.87, 0.52, 0.03, 0.35])
     cbar_no2=plt.colorbar(cf_no2,cax=ax_cb_no2,extend='max')
-    cbar_no2.set_label('$NO_2$ Conc. (${\mu}g/m^3$)',fontsize=10)
+    cbar_no2.set_label('$NO_x$ Conc. (${\mu}g/m^3$)',fontsize=10)
     ax_cb_diff=fig.add_axes([0.87, 0.11, 0.03, 0.35])
     cbar_diff=plt.colorbar(cf_diff,cax=ax_cb_diff,extend='both')
-    cbar_diff.set_label('$NO_2$ Conc.Difference (${\mu}g/m^3$)',fontsize=10)
+    cbar_diff.set_label('$NO_x$ Conc.Difference (${\mu}g/m^3$)',fontsize=10)
     
-    plt.suptitle(f'Composite of $NO_2$ Distribution on Lee Vortex Days and Climate Shifts (2091-2100)',fontsize=16)
-    plt.savefig(f'../figures/no2_2020s_2090s_WD.png')
+    plt.suptitle(f'Composite of $NO_x$ Distribution on Lee Vortex Days and Climate Shifts (2091-2100)',fontsize=16)
+    plt.savefig(f'../figures/fig7_no2_2020s_2090s_WD.png',dpi=300)
              

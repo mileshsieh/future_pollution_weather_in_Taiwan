@@ -1,6 +1,7 @@
 #python
 ./code/.ipynb_checkpoints/
 ./code/__pycache__/
+./__pycache__/
 ./codes_supplementary/.ipynb_checkpoints/
 ./codes_supplementary/__pycache__/
 ./ipynb_checkpoints/

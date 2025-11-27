@@ -20,7 +20,7 @@ if __name__=='__main__':
   ax.grid(axis='y')
   ax2=ax.twinx()
 
-  rects=ax2.bar(x-0.25,df.nepisodes,0.5,align='edge',color='orange',zorder=4)
+  rects=ax2.bar(x-0.25,df['3p_episode'],0.5,align='edge',color='orange',zorder=4)
   #ax2.bar_label(rects,fmt='%d',padding=3,fontsize=10,zorder=6)
 
   # Add some text for labels, title and custom x-axis tick labels, etc.
@@ -33,7 +33,7 @@ if __name__=='__main__':
   ax2.set_ylim(0,5.5)
   ax2.bar_label(rects,fmt='%d',padding=3,fontsize=12,zorder=6)
   fig.subplots_adjust(top=0.93,bottom=0.2)
-  plt.savefig('../figures/WD150_count.png',dpi=200)
+  plt.savefig('../figures/fig8_WD150_count.png',dpi=300)
 
 
 

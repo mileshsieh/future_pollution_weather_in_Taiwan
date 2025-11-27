@@ -130,8 +130,8 @@ if __name__=='__main__':
     #cbar.set_label('Height (km)',fontsize=14)
     ax_cb_no2 = fig.add_axes([0.87, 0.12, 0.03, 0.75])
     cbar_no2=plt.colorbar(cf_no2,cax=ax_cb_no2,extend='max')
-    cbar_no2.set_label('$NO_2$ (${\mu}g/m^3$)',fontsize=14)
+    cbar_no2.set_label('$NO_x$ (${\mu}g/m^3$)',fontsize=14)
 
-    plt.suptitle(f'Comparison of $NO_2$ Distribution Composite in {m} {runDict[run][0]}',fontsize=15)
+    plt.suptitle(f'Comparison of $NO_x$ Distribution Composite in {m} {runDict[run][0]}',fontsize=15)
     plt.savefig(f'../figures/no2_comp_all.png')
     

@@ -88,17 +88,20 @@ if __name__=='__main__':
     #load flow regime
     yr_start=2008
     yr_end=2010
-    era5=pd.read_csv('../data/cold_season_weather_regimes_with_idx.csv',header=0,parse_dates=[0])
-    era5=era5[(era5.yyyymmdd>=(yr_start*10000+101))&(era5.yyyymmdd<=(yr_end*10000+1231))&(era5.prRatio<=0.3)&(era5.meanWS>=4.0)&(era5.meanWS<=12.0)&(era5.meanWD>=45)&(era5.meanWD<=195)]
+
+    ish=pd.read_csv('../data/noWx.obs.47918_wind.2008to2019.csv',header=0,parse_dates=[0,])
+    ish['ymd']=ish.apply(lambda ser: pd.to_datetime(ser.yyyymmdd).strftime('%Y%m%d'),axis=1)
+    ish=ish[(ish.yyyymmdd>='2008-01-01')&(ish.yyyymmdd<='2010-12-31')&(ish.ws925>=4.0)&(ish.ws925<=12.0)&(ish.wd925>=45)&(ish.wd925<=195)]
+
     def getDateList(df,wd):
-        df_within=df[(df.meanWD>=wd-15)&(df.meanWD<=wd+15)]
-        dlist=df_within.yyyymmdd.values.astype(int)
-        dtlist=df_within.date.values
-        mean_ws=df_within.meanWS.mean()
-        mean_wd=df_within.meanWD.mean()
+        df_within=df[(df.wd925>=wd-15)&(df.wd925<=wd+15)]
+        dlist=df_within.ymd.values.astype(int)
+        dtlist=df_within.yyyymmdd.values
+        mean_ws=df_within.ws925.mean()
+        mean_wd=df_within.wd925.mean()
         return dlist,dtlist,mean_wd,mean_ws
-    
-    #load ERA5 fro plot composite wind 
+    '''
+    #load ERA5 for plot composite wind 
     ERA5_SFC_DIR='/data/dadm1/reanalysis/ERA5/SFC/day'
     ERA5_PRS_DIR='/data/dadm1/reanalysis/ERA5/PRS/day'
     #ERA5 wind field at 1000mb
@@ -116,7 +119,7 @@ if __name__=='__main__':
     lonERA5=ds_ERA5_wind.longitude.values
     latERA5=ds_ERA5_wind.latitude.values
     xx,yy=np.meshgrid(lonERA5,latERA5)
-
+    '''
     wdList=[60,90,120,150,180]
     nRegime=len(wdList)
     plt.close()
@@ -124,12 +127,12 @@ if __name__=='__main__':
     pmlbl=['a','b','c','d','e']
     eilbl=['f','g','h','i','j']
     for i,wd in enumerate(wdList):
-        dlist,dtlist,meanWD,meanWS=getDateList(era5,wd)
+        dlist,dtlist,meanWD,meanWS=getDateList(ish,wd)
         print(wd,dlist.shape[0],meanWD,meanWS)
 
         #get ERA5 composite
-        uERA5=ds_ERA5_wind.sel(time=dtlist).mean(dim='time').u.values
-        vERA5=ds_ERA5_wind.sel(time=dtlist).mean(dim='time').v.values
+        #uERA5=ds_ERA5_wind.sel(time=dtlist).mean(dim='time').u.values
+        #vERA5=ds_ERA5_wind.sel(time=dtlist).mean(dim='time').v.values
 
         #calculate enhancement index
         idxList=[np.where(dateList==idate)[0][0] for idate in dlist]
@@ -160,18 +163,21 @@ if __name__=='__main__':
         ax=plt.subplot(2,nRegime,i+1)
         pPolluted_TW=(conc>=54.5).sum()/conc.shape[0]*100
         lbl='(%s) $WD=%d\pm15^\circ(%d days)$\n[%.1f%% stations polluted]'%(pmlbl[i],wd,pm25r_days.shape[0],pPolluted_TW)
-        strm=ax.streamplot(xx,yy,uERA5,vERA5,color='blue')         
+        #strm=ax.streamplot(xx,yy,uERA5,vERA5,color='blue')         
         cs_pm25=plotTW('PM25',ax,lon_enh,lat_enh,conc,lbl,norm=pm25_norm,cmap=pm25_cmap)
         #q1=ax.quiver(xx,yy,uERA5,vERA5,scale=40,color='blue',width=0.02,units='xy')
-        
+        ax.set_xlim(119.3,122.3)
+        ax.set_ylim(21.7,25.6)
+
         ax=plt.subplot(2,nRegime,nRegime+i+1)
-        
         r_thd=0.7
         r_percentage_TW=(enh_idx>=r_thd).sum()/enh_idx.shape[0]*100
-        strm=ax.streamplot(xx,yy,uERA5,vERA5,color='blue')         
+        #strm=ax.streamplot(xx,yy,uERA5,vERA5,color='blue')         
         cs_ratio=plotTW('ratio',ax,lon_enh,lat_enh,enh_idx,'(%s) [%.1f%% station EI over %.1f]'%(eilbl[i],r_percentage_TW,r_thd),norm=colors.Normalize(0.0,1.0),cmap='jet')
         #q1=ax.quiver(xx,yy,uERA5,vERA5,scale=40,color='blue',width=0.02,units='xy')
-
+        ax.set_xlim(119.3,122.3)
+        ax.set_ylim(21.7,25.6)
+        
     fig.subplots_adjust(left=0.02,right=0.85,bottom=0.02,top=0.85)
     ax_cb_pm25 = fig.add_axes([0.87, 0.47, 0.02, 0.38])
     cbar_pm25=plt.colorbar(cs_pm25,cax=ax_cb_pm25, ticks=pm25_bounds,spacing='proportional')
@@ -184,4 +190,4 @@ if __name__=='__main__':
     #plt.quiverkey(q1,0.88,0.87,10,'10.0 m/s',labelpos='E', coordinates='figure').set_zorder(11)
 
     plt.suptitle('$PM_{2.5}$ Concentration and Enhancement Index under Various Flow Regime(%d-%d)'%(yr_start,yr_end),fontsize=30)
-    plt.savefig('../figures/fig3_bifurcation_enh_tw.png')
+    plt.savefig('../figures/figS1_bifurcation_enh_tw.png',dpi=300)

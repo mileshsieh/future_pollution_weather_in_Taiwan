@@ -130,9 +130,9 @@ if __name__=='__main__':
     fig.subplots_adjust(left=0.06,top=0.75,bottom=0.12,right=0.89)
     ax_cb_no2 = fig.add_axes([0.91, 0.12, 0.03, 0.75])
     cbar_no2=plt.colorbar(cf_no2,cax=ax_cb_no2,extend='max')
-    cbar_no2.set_label('$NO_2$ Conc. (${\mu}g/m^3$)',fontsize=14)
+    cbar_no2.set_label('$NO_x$ Conc. (${\mu}g/m^3$)',fontsize=14)
     
-    plt.suptitle(f'Composite of $NO_2$ Distribution on Lee Vortex Days ({runDict[run][1]}-{runDict[run][2]})',fontsize=16)
-    plt.savefig(f'../figures/no2.composite.2020s.png')
+    plt.suptitle(f'Composite of $NO_x$ Distribution on Lee Vortex Days ({runDict[run][1]}-{runDict[run][2]})',fontsize=16)
+    plt.savefig(f'../figures/fig6_no2.composite.2020s.png',dpi=300)
     
              
