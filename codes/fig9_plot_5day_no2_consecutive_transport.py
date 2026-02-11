@@ -211,7 +211,7 @@ if __name__=='__main__':
         plt.text(tmList[-1],25+15,'WHO AQG level',color='g',horizontalalignment='right',verticalalignment='center')
         plt.text(tmList[-1],120+15,'WHO AQG interim target 1',color='r',horizontalalignment='right',verticalalignment='center')
 
-        ax.set_title('(f) Average $NO_x$ Concentration of Greap Taipei Area in 5-Day Pollution Episode')
+        ax.set_title('(f) Average $NO_x$ Concentration of Greater Taipei Area in 5-Day Pollution Episode')
 
         #fig.subplots_adjust(left=0.07,top=0.9,bottom=0.1,right=0.89)
         fig.subplots_adjust(left=0.07,right=0.89)

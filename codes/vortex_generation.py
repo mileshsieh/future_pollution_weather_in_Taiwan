@@ -137,7 +137,7 @@ if __name__=='__main__':
     plt.close() 
     fig=plt.figure(figsize=(18,7.5)) 
     ax1=plt.subplot(121)
-    ax1.set_title('Upstream FLow RegimesPhase Diagram',fontsize=20)
+    ax1.set_title('Upstream Flow Regimes Phase Diagram',fontsize=20)
     plotWSWDAxes(ax1,'darkred','blue')
     ax1.scatter(x_temp,y_temp,c='g',s=200,marker='X',edgecolors='k')
 
